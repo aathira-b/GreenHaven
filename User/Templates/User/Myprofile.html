@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="2">
+        <tr>
+        <td colspan="2" align="center"><img src="{{ user.user_photo.url }}" alt="User Photo" style="width: 100px; height: auto;"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{user.user_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{user.user_email}}</td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>{{user.user_contact}}</td>
+        </tr>
+       
+        
+        <tr>
+            <td>Address</td>
+            <td>{{user.user_address}}</td>
+        </tr>
+        <tr>
+            <td>District</td>
+            <td>{{user.place.district.district_name}}</td>
+        </tr>
+        <tr>
+            <td>Place</td>
+            <td> {{user.place.place_name}}</td>
+        </tr>
+        <a href="{% url 'User:Editprofile'  %}">Edit Profile</a>
+        <a href="{% url 'User:Changepassword'  %}">Change Password</a>
+    </table>
+</form>
+
+</body>
+</html>

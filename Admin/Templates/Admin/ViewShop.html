@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop List</title>
+</head>
+<body>
+    <h1 align="center">Pending</h1>
+    <table align="center" border="1">
+        <tr>
+            <td>Sl.No</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>Logo</td>
+            <td>License</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Action</td> 
+            <td>Status</td>
+        </tr>
+        {% for i in pending %}
+            <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.shop_email}}</td>
+            <td>{{i.shop_contact}}</td>
+            <td>{{i.shop_address}}</td>
+            <td><img src="{{i.shop_logo.url}}" style="width:100px;height:auto"></td>
+            <td><img src="{{i.shop_license.url}}" style="width:100px;height:auto"></td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{% url 'Admin:acceptshop' i.id %}">Accept</a>
+            <a href="{% url 'Admin:rejectshop' i.id%}">Reject</a></td>
+            <td><p>Pending</p></td>
+            </tr>
+            {% endfor %}
+    </table>
+    <h1 align="center">Accepted</h1>
+    <table align="center" border="1">
+        <tr>
+            <td>Sl.No</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>Logo</td>
+            <td>License</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Action</td> 
+            <td>Status</td>
+        </tr>
+        {% for i in accepted %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.shop_name}}</td>
+                <td>{{i.shop_email}}</td>
+                <td>{{i.shop_contact}}</td>
+                <td>{{i.shop_address}}</td>
+                <td><img src="{{i.shop_logo.url}}" style="width:100px;height:auto"></td>
+                <td><img src="{{i.shop_license.url}}" style="width:100px;height:auto"></td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td>
+                <a href="{% url 'Admin:rejectshop' i.id%}">Reject</a></td>
+                <td><p>Accepted</p></td>
+                </tr>
+        {% endfor %}
+    </table>
+    <h1 align="center">Rejected</h1>
+    <table align="center" border="1">
+        <tr>
+            <td>Sl.No</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>Logo</td>
+            <td>License</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Action</td> 
+            <td>Status</td>
+        </tr>
+        {% for i in rejected %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.shop_email}}</td>
+            <td>{{i.shop_contact}}</td>
+            <td>{{i.shop_address}}</td>
+            <td><img src="{{i.shop_logo.url}}" style="width:100px;height:auto"></td>
+            <td><img src="{{i.shop_license.url}}" style="width:100px;height:auto"></td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{% url 'Admin:acceptshop' i.id %}">Accept</a>
+            </td>
+            <td><p>Rejected</p></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

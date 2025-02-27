@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="2">
+        <tr>
+            <td>Name</td>
+            <td><input type ="text" name="shop_name" value="{{shop.shop_name}}"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type ="text" name="shop_email" value="{{shop.shop_email}}"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type ="text" name="shop_contact" value="{{shop.shop_contact}}"></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><textarea rows="3" cols="6" name="shop_address" >{{shop.shop_address}}</textarea></td>
+        </tr> 
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="Edit"></td>
+        </tr>   
+    </table>
+</form>
+
+</body>
+</html>

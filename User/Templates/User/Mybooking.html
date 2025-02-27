@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="2">
+        <tr>
+            <td>Sl.No</td>
+           <td>Booking Date</td>
+            <td>Total Amount</td>
+            <td>Advance Amount</td>
+            <td>Action</td>
+                 
+        </tr>
+        {% for i in result %}
+        <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.booking_date}}</td>
+        <td>{{i.booking_totalamount}}</td>
+        <td>{{i.booking_adv_amount}}</td>
+        <td><a href="{% url 'User:ViewMyproduct' i.id %}">MyProducts</a></td>
+
+       
+      
+    </tr>
+   
+        {% endfor %}
+    </table>
+</form>
+{% if msg %}
+<script>
+    alert("{{msg}}");
+    window.location = "{% url 'User:Viewproduct' sid %}";
+</script>
+{% endif %}
+</body>
+</html>

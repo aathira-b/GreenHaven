@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>designer profile</title>
+</head>
+<body><form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="2">
+        <tr>
+        <td colspan="2" align="center"><img src="{{ designer.designer_photo.url }}" alt="designer Photo" style="width: 100px; height: auto;"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{designer.designer_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{designer.designer_email}}</td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>{{designer.designer_contact}}</td>
+        </tr>
+        
+        <tr>
+            <td>Address</td>
+            <td>{{designer.designer_address}}</td>
+        </tr>
+        <tr>
+            <td>District</td>
+            <td>{{designer.place.district.district_name}}</td>
+        </tr>
+        <tr>
+            <td>Place</td>
+            <td> {{designer.place.place_name}}</td>
+        </tr>
+        <a href="{% url 'Designer:Editprofile'  %}">Edit Profile</a>
+        <a href="{% url 'Designer:Changepassword'  %}">Change Password</a>
+    </table>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View product</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+              <th>sl no</th>
+              <th>Name</th>
+              <th>Details</th>
+              <th>price</th>
+              <th>photo</th>
+              <th>action</th>
+            </tr>
+            {% for i in product %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_details}}</td>
+                <td>{{i.product_price}}</td>
+                <td><img src="{{i.product_photo.url }}" alt="product_Photo" width="100"></td>
+                <td><a href="{% url 'User:Addcart' i.id %}">AddToCart</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+         </form>
+    </body>
+    </html>
+    {% if msg %}
+    <script>
+        alert("{{msg}}")
+        window.location="{% url 'User:Viewproduct' %}"
+    </script>
+    {% endif %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designers List</title>
+</head>
+<body>
+    <h1 align="center">Pending</h1>
+    <table align="center" border="1">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Proof</th>
+            <th>Action</th>
+        </tr>
+        {% for i in pending %}
+        <tr> 
+            <td>{{forloop.counter}}</td>
+            <td>{{i.designer_name}}</td> 
+            <td>{{i.designer_email}}</td> 
+            <td><img src="{{ i.designer_proof.url }}" alt="designer Proof" width="100"></td> 
+            <td><a href="{% url 'Admin:acceptdesigner' i.id %}">Accept</a><br>
+                <a href="{% url 'Admin:rejectdesigner' i.id %}">Reject</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1 align="center">Accepted</h1>
+    <table align="center" border="1">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Proof</th>
+            <th>Action</th>
+        </tr>
+        {% for i in accepted %}
+        <tr> 
+            <td>{{forloop.counter}}</td>
+            <td>{{i.designer_name}}</td> 
+            <td>{{i.designer_email}}</td>
+            <td><img src="{{ i.designer_proof.url }}" alt="designer Proof" width="100"></td> 
+            <td><p>Accepted</p></td>
+            <td>
+                <a href="{% url 'Admin:rejectdesigner' i.id %}">Reject</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1 align="center">Rejected</h1>
+    <table align="center" border="1">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Proof</th>
+            <th>Action</th>
+        </tr>
+        {% for i in rejected %}
+        <tr> 
+            <td>{{forloop.counter}}</td>
+            <td>{{i.designer_name}}</td> 
+            <td>{{i.designer_email}}</td>
+            <td><img src="{{ i.designer_proof.url }}" alt="designer Proof" width="100"></td> 
+            <td><p>Rejected</p></td> 
+            <td><a href="{% url 'Admin:acceptdesigner' i.id %}">Accept</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

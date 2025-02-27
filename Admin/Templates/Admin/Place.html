@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>place</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="2" align="center">
+            <tr>
+                <th>District</th>
+                <td>
+                    <select name="sel_district">
+                        {% for i in result %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {%endfor%}
+                    </select> </td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><input type="text" name="txt_place" id=""></td>
+            </tr>
+            <tr>
+               
+                <td colspan="2"><input type="submit"   value="submit"></td>
+            </tr>
+        </table>
+        <table border="2" align="center">
+            <tr>
+              <th>sl no</th>
+              <th>district</th>
+              <th>Place</th>
+              <th colspan="2">action</th>
+            </tr>
+            {% for i in district %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.district.district_name}}</td>
+            <td>{{i.place_name}}</td>
+            <td><a href="{% url 'Admin:delplace' i.id %}">DELETE</a>
+        </tr>
+        {% endfor %}
+</body>
+</html>

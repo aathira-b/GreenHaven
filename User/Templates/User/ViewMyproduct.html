@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View my product</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+              <th>sl no</th>
+              <th>Product photo</th>
+              <th>Name</th>
+              <th>price</th>
+              <th>Quantity</th>
+            </tr>
+            {% for i in product %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.product_photo.url }}" alt="product_Photo" width="100"></td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_price}}</td>
+                <td>{{i.product_quantity}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+         </form>
+    </body>
+    </html>
