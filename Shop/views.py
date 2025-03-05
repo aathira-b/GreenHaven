@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from Shop.models import*
 from Guest.models import *
+from User.models import *
 # Create your views here.
 
 def Homepage(request):
@@ -39,7 +40,7 @@ def Editprofile(request):
 #                 return redirect("Shop:Myprofile")
 #             return render(request,"Shop/Changepassword.html", {'error': "Your Password doesn't match"})
 #         return render(request,"Shop/Changepassword.html", {'error': "Your old password doesn't match"})
-        
+
 def Changepassword(request):
      error1="Your Password does'nt match"
      error2="Your old password  does'nt match"
@@ -61,16 +62,27 @@ def Changepassword(request):
      else:
          return render(request,"Shop/Changepassword.html")
 
-
 def addproduct(request):
    category=tbl_category.objects.all()
    pdt=tbl_product.objects.all()
    if request.method=="POST":
       product=request.POST.get("product")
-      tbl_product.objects.create(category_id=tbl_category.objects.get(id=request.POST.get("sel_category")),product_name=request.POST.get("product_name"),product_details=request.POST.get("product_details"),product_price=request.POST.get("product_price"),product_photo=request.FILES.get("product_photo"))
+      tbl_product.objects.create(subcategory_id=tbl_subcat.objects.get(id=request.POST.get("sel_subcategory")),product_name=request.POST.get("product_name"),product_details=request.POST.get("product_details"),product_price=request.POST.get("product_price"),product_photo=request.FILES.get("product_photo"),shop=tbl_shop.objects.get(id=request.session["sid"]))
       return render(request,'Shop/Addproduct.html',{'product':pdt,'category':category})
    else:
         return render(request,'Shop/Addproduct.html',{'product':pdt,'category':category})    
+
+def ajaxsubcategory(request):
+    sub = tbl_subcat.objects.filter(category=request.GET.get("did"))
+    return render(request,"Shop/AjaxSubcategory.html",{"sub":sub})
+
+def viewbooking(request):
+    cart = tbl_cart.objects.filter(product__shop=request.session["sid"])
+    bkid = []
+    for i in cart:
+        bkid.append(i.booking.id)
+    booking = tbl_booking.objects.filter(id__in=bkid)
+    return render(request, "Shop/Viewbooking.html",{"booking":booking})
 
 def delpdt(request,id):
    tbl_product.objects.get(id=id).delete()

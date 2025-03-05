@@ -1,243 +1,236 @@
 
-<script type="text/javascript">
-    function preventBack() { window.history.forward(); }
-    setTimeout("preventBack()", 0);
-    window.onunload = function () { null };
-  </script>
-  
-  <style>
-      :root {primary-col:#6C7BEE;}
-      .bg {
-        background-color:black;
-        width: 480px;
-        height: auto;
-        align-items: top;
-        overflow:hidden;
-        margin: 0 auto;
-        box-sizing: border-box;
-        padding: 5px;
-        font-family: 'Roboto';
-        margin-top: 0px;
-        margin-bottom: 0px;
-      }
-      .card {
-        background-color: rgb(231, 228, 228);
-        width: 100%;
-        height:auto;
-        float: left;
-        margin-top: 0px;
-        border-radius: 5px;
-        box-sizing: border-box;
-        padding: 20px 30px 25px 20px;
-        text-align: center;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Success</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        background: #dcf0fa;
+    }
+
+    .container {
+        max-width: 380px;
+        margin: 50px auto;
+        overflow: hidden;
+    }
+
+    .printer-top {
+        z-index: 1;
+        border: 6px solid #666666;
+        height: 6px;
+        border-bottom: 0;
+        border-radius: 6px 6px 0 0;
+        background: #333333;
+    }
+
+    .printer-bottom {
+        z-index: 0;
+        border: 6px solid #666666;
+        height: 6px;
+        border-top: 0;
+        border-radius: 0 0 6px 6px;
+        background: #333333;
+    }
+
+    .paper-container {
         position: relative;
-        box-shadow:  20px 30px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-        &__success {;
-          position: absolute;
-          top: -50px;
-          left: 145px;
-          width: 100px;
-          height: 100px;
-          border-radius: 100%;
-          background-color: #60c878;
-          border: 5px solid white;
-          i{
-            color: white;
-            line-height: 100px;
-            font-size: 45px;
-          }
-          
+        overflow: hidden;
+        height: 467px;
+    }
+
+    .paper {
+        background: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        height: 447px;
+        position: absolute;
+        z-index: 2;
+        margin: 0 12px;
+        margin-top: -12px;
+        animation: print 5000ms cubic-bezier(0.68, -0.55, 0.265, 0.9);
+        /* -moz-animation: print 5000ms cubic-bezier(0.68, -0.55, 0.265, 0.9) infinite; */
+    }
+
+    .main-contents {
+        margin: 0 12px;
+        padding: 24px;
+    }
+
+    /* Paper Jagged Edge */
+    .jagged-edge {
+        position: relative;
+        height: 20px;
+        width: 100%;
+        margin-top: -1px;
+    }
+
+    .jagged-edge:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: linear-gradient(45deg,
+                transparent 33.333%,
+                #ffffff 33.333%,
+                #ffffff 66.667%,
+                transparent 66.667%),
+            linear-gradient(-45deg,
+                transparent 33.333%,
+                #ffffff 33.333%,
+                #ffffff 66.667%,
+                transparent 66.667%);
+        background-size: 16px 40px;
+        background-position: 0 -20px;
+    }
+
+    .success-icon {
+        text-align: center;
+        font-size: 48px;
+        height: 72px;
+        background: #359d00;
+        border-radius: 50%;
+        width: 72px;
+        height: 72px;
+        margin: 16px auto;
+        color: #fff;
+    }
+
+    .success-title {
+        font-size: 22px;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        color: #666;
+        font-weight: bold;
+        margin-bottom: 16px;
+    }
+
+    .success-description {
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        line-height: 21px;
+        color: #999;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .order-details {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+
+    }
+
+    .order-number-label {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .order-number {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        line-height: 48px;
+        font-size: 48px;
+        padding: 8px 0;
+        margin-bottom: 24px;
+    }
+
+    .complement {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: #32a852;
+    }
+
+    @keyframes print {
+        0% {
+            transform: translateY(-90%);
         }
-        &__msg {
-          text-transform: uppercase;
-          color: #55585b;
-          font-size: 18px;
-          font-weight: 500;
-          text-align: top;
-          
+
+        100% {
+            transform: translateY(0%);
         }
-        &__submsg {  
-          color: #959a9e;
-          font-size: 16px;
-          font-weight: 400;
-          margin-top: 0px;
+    }
+
+    @-webkit-keyframes print {
+        0% {
+            -webkit-transform: translateY(-90%);
         }
-        &__body {
-          background-color: #d90505;
-          border-radius: 4px;
-          width: 100%;
-          margin-top: 30px;
-          float: left;
-          box-sizing: border-box;
-          padding: 30px;
+
+        100% {
+            -webkit-transform: translateY(0%);
         }
-        &__avatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 100%;
-          display: inline-block;
-          margin-right: 10px;
-          position: relative;
-          top: 7px;
+    }
+
+    @-moz-keyframes print {
+        0% {
+            -moz-transform: translateY(-90%);
         }
-        &__recipient-info {
-          display: inline-block;
+
+        100% {
+            -moz-transform: translateY(0%);
         }
-        &__recipient { 
-          color: #232528;
-          text-align: left;
-          margin-bottom: 5px;
-          font-weight: 600;
+    }
+
+    @-ms-keyframes print {
+        0% {
+            -ms-transform: translateY(-90%);
         }
-        &__email {
-          color: #838890;
-          text-align: left;
-          margin-top: 0px; 
+
+        100% {
+            -ms-transform: translateY(0%);
         }
-        &__price {
-          color: #232528;
-          font-size: 70px;
-          margin-top: 25px;
-          margin-bottom: 30px;
-          span {font-size: 60%;}
-        }
-        &__method {
-          color: #d3cece;
-          text-transform: uppercase;
-          text-align: left;
-          font-size: 11px;
-          margin-bottom: 5px;
-        }
-        &__payment {
-          background-color: white;
-          border-radius: 4px;
-          width: 100%;
-          height: 100px;
-          box-sizing: border-box;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        &__credit-card {
-          width: 50px;
-          display: inline-block;
-          margin-right: 15px;
-        }
-        &__card-details { 
-          display: inline-block;
-          text-align: left; 
-        }
-        &__card-type {
-          text-transform: uppercase;
-          color: #232528;
-          font-weight: 600;
-          font-size: 12px;
-          margin-bottom: 3px;
-        }
-        &__card-number {
-          color: #838890;
-          font-size: 12px;    
-          margin-top: 0px;
-        }
-        &__tags { 
-          clear: both;
-          padding-top: 15px;
-        }
-        &__tag { 
-          text-transform: uppercase;
-          background-color: #f8f6f6;
-          box-sizing: border-box;
-          padding: 3px 5px;
-          border-radius: 3px;
-          font-size: 10px;
-          color: #d3cece;
-        }
-      }
-  
-  
-  .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-  h2 {
-    font-family: Helvetica;
-    font-size: 36px;
-    margin-top: 0px;
-    color: #333;
-    opacity: 0;
-  }
-  
-  input[type="checkbox"]:checked ~ h2 {
-    animation: .1s title ease-in-out;
-    animation-delay: 1.2s;
-    animation-fill-mode: forwards;
-  }
-  
-  .circle {
-    stroke-dasharray: 1194;
-    stroke-dashoffset: 1194;
-  }
-  
-  input[type="checkbox"]:checked + svg .circle {
-    animation: circle 1s ease-in-out;
-    animation-fill-mode: forwards;
-  }
-  
-  .tick {
-    stroke-dasharray: 350;
-    stroke-dashoffset: 350;
-    -webkit-text-stroke-color: rgb(22, 132, 10);
-  }
-  </style>
-  </head>
-      <body onLoad="Redirect()">
-      <div class="bg">
-        
-        <div class="card">
-          
-          <span class="card__success"><i class="ion-checkmark"></i></span>
-          
-          <h1 class="card__msg">Payment Complete</h1>
-  
-  <h2 class="card__submsg">Thank you for your transfer</h2>
-          
-          <div class="card__body">
-            
-            
-            <div class="card__recipient-info">
-             
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="printer-top"></div>
+
+        <div class="paper-container">
+            <div class="printer-bottom"></div>
+
+            <div class="paper">
+                <div class="main-contents">
+                    <div class="success-icon">&#10004;</div>
+                    <div class="success-title">
+                        Payment Complete
+                    </div>
+                    <div class="success-description">
+                        Thank you for completing the payment! <br>
+                        You will be redirected shortly
+                        <!-- You will shortly receive an email of your payment. -->
+                    </div>
+                    <div class="order-details">
+                        <div class="order-number-label">Transaction ID</div>
+                        <div class="order-number"></div>
+                        <div class="complement">Thank You!</div>
+                    </div>
+                </div>
+                <div class="jagged-edge"></div>
             </div>
-            
-          
-            
-            <p class="card__method">Payment method</p>
-            <div class="card__payment">
-              <img src="https://seeklogo.com/images/V/VISA-logo-F3440F512B-seeklogo.com.png" class="card__credit-card">
-              <div class="card__card-details">
-                <p class="card__card-type">Credit / debit card</p>
-                  
-              </div>
-            </div>
-            
-          </div>
-          
-          <div class="card__tags">
-              <span class="card__tag">completed</span>
-             
-          </div>
-          
         </div>
-        
-      </div>
-      </body>
-      <script>
-      function Redirect()
-      {
-          window.setTimeout(function() {
-          window.location = "{% url 'User:Homepage' %}";
-        }, 5000);
-      }
-      </script>
+    </div>
+</body>
+<script>
+
+    function generateTransactionID() {
+        var min = 100000000;
+        var max = 999999999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var orderNumberElement = document.querySelector('.order-number');
+
+    orderNumberElement.textContent = generateTransactionID();
+
+    setTimeout(function () {
+        window.location.href = "{% url 'User:Homepage' %}";
+    }, 8000); // 8000 milliseconds = 8 seconds
+</script>
+
+</html>

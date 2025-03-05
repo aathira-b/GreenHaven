@@ -2,7 +2,6 @@
 # Create your models here.
 from django.db import models
 from Admin.models import *
-from Guest.models import *
 
 class tbl_user(models.Model):
    user_name=models.CharField(max_length=50)

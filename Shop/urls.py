@@ -9,4 +9,8 @@ urlpatterns=[
     path('addproduct/',views.addproduct,name='addproduct'),
     path('delpdt/<int:id>',views.delpdt,name='delpdt'),
     path('stock/<int:id>',views.stock,name='stock'),
+
+    path('ajaxsubcategory/',views.ajaxsubcategory,name='ajaxsubcategory'),
+    path('viewbooking/',views.viewbooking,name='viewbooking'),
+
 ]

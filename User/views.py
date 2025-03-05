@@ -18,8 +18,6 @@ def Myprofile(request):
     else:
         return redirect("Guest:Login")
 
-
-
        
 
 
@@ -79,8 +77,6 @@ def Feedback(request):
         return redirect("Guest:Login")
 
 
-        
-
 
 
 def Viewproduct(request):
@@ -91,7 +87,6 @@ def Viewproduct(request):
         return redirect("Guest:Login")
 
 
-       
 
 def Addcart(request,pid):
     productdata=tbl_product.objects.get(id=pid)
@@ -183,7 +178,7 @@ def paymentsuc(request):
 
 def Mybooking(request):
     if "uid" in request.session:
-        booking=tbl_booking.objects.filter(booking_status__gte=0,user=request.session['uid'])   
+        booking=tbl_booking.objects.filter(booking_status__gt=0,user=request.session['uid'])   
         return render(request,'User/Mybooking.html',{'result':booking})     
     else:
          return redirect("Guest:Login")    

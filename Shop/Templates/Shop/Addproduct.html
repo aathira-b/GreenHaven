@@ -1,67 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
 </head>
+
 <body>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    <table border="2">
-        <tr>
-            <th>category</th>
-            <td>
-                <select name="sel_category">
-                    {% for i in category %}
-                    <option value="{{i.id}}">{{i.category_name}}</option>
-                    {%endfor%}
-                </select> </td>
-        </tr>
-    <tr>
-        <td>product name</td>
-        <td><input type="text" name="product_name" id=""></td>
-    </tr>
-    <tr>
-        <td>product details</td>
-        <td><input type="text" name="product_details" id=""></td>
-    </tr>
-    <tr>
-        <td>product price</td>
-        <td><input type="text" name="product_price" id=""></td>
-    </tr>
-    <tr>
-        <td>Photo</td>
-        <td><input type="file" name="product_photo"/></td>
-    </tr>
-    <tr>
-        <td colspan="2" align="center"><input type="submit" value="add"></td>
-    </tr>
-   
-    </table>
-    <table border="2">
-        <tr>
-          <th>sl no</th>
-          <th>Category</th>
-          <th>Name</th>
-          <th>Details</th>
-          <th>price</th>
-          <th>Photo</th>
-          <th>action</th>
-        </tr>
-        {% for i in product %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.category_id.category_name}}</td>
-            <td>{{i.product_name}}</td>
-            <td>{{i.product_details}}</td>
-            <td>{{i.product_price}}</td>
-            <td><img src="{{ i.product_photo.url }}" alt="product Photo" width="100"></td>
-            <td><a href="{% url 'Shop:delpdt' i.id %}">DELETE</a>
-            <a href="{% url 'Shop:stock' i.id %}">ADD STOCK</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-     </form>
+        <table border="2">
+            <tr>
+                <th>category</th>
+                <td>
+                    <select name="sel_category" id="sel_category">
+                        <option value="">...Select...</option>
+                        {% for i in category %}
+                        <option value="{{i.id}}">{{i.category_name}}</option>
+                        {%endfor%}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Subcategory</th>
+                <td>
+                    <select name="sel_subcategory" id="sel_subcategory">
+                        <option value="">...Select...</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>product name</td>
+                <td><input type="text" name="product_name" id=""></td>
+            </tr>
+            <tr>
+                <td>product details</td>
+                <td><input type="text" name="product_details" id=""></td>
+            </tr>
+            <tr>
+                <td>product price</td>
+                <td><input type="text" name="product_price" id=""></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="product_photo" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="add"></td>
+            </tr>
+
+        </table>
+        <table border="2">
+            <tr>
+                <th>sl no</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Details</th>
+                <th>price</th>
+                <th>Photo</th>
+                <th>action</th>
+            </tr>
+            {% for i in product %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.category_id.category_name}}</td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_details}}</td>
+                <td>{{i.product_price}}</td>
+                <td><img src="{{ i.product_photo.url }}" alt="product Photo" width="100"></td>
+                <td><a href="{% url 'Shop:delpdt' i.id %}">DELETE</a>
+                    <a href="{% url 'Shop:stock' i.id %}">ADD STOCK</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
 </body>
+
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_category").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Shop:ajaxsubcategory' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_subcategory").html(data);
+            },
+        });
+    });
+</script>
